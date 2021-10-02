@@ -3,33 +3,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: peso-web
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: web
+      app: peso-web
   template:
     metadata:
       labels:
-        app: web
+        app: peso-web
     spec:
       containers:
-        - name: web
+        - name: peso-web
           image: na1jefferson/conversao-peso:v1
           ports:
             - containerPort: 80
 ---
-# Service do web
+# Service do peso-web
 apiVersion: v1
 kind: Service
 metadata:
-  name: web
+  name: peso-web
 spec:
   selector:
-    app: web
+    app: peso-web
   ports:
     - port: 80
       targetPort: 80
       nodePort: 30000
-  type: NodePort
+  type: LoadBalancer
